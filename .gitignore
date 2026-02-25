@@ -1,0 +1,26 @@
+# Ignore Google Cloud credentials
+server/config/serviceAccountKey.json
+
+# Ignore secrets
+*.env
+*.key
+*.pem
+*.p12
+*.crt
+*.cert
+*.secret
+*credentials*
+*token*
+*password*
+*private*
+*ServiceAccount*
+
+# Node modules
+server/node_modules/
+
+# Flutter build
+flutter_app/build/
+
+# Other common ignores
+*.log
+.DS_Store

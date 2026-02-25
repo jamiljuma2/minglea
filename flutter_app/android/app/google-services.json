@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "505667338617",
+    "project_id": "minglea-2a107",
+    "storage_bucket": "minglea-2a107.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505667338617:android:b20d3151023528c4212fa8",
+        "android_client_info": {
+          "package_name": "com.example.minglea"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtfFrqvPVJ56aWYxaZZ869Qng2YsWcnfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
