@@ -1,3 +1,4 @@
+
 name: apex_dating_app
 
 description: A production-ready dating app built with Flutter and Firebase.
@@ -26,7 +27,9 @@ dependencies:
   geolocator: ^14.0.2
   intl: ^0.20.2
   shared_preferences: ^2.2.2
+
   in_app_purchase: ^3.1.11
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
