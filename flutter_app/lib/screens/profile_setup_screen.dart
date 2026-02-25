@@ -75,7 +75,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
       errorMessage = null;
     });
     try {
-      final apiUrl = 'http://localhost:5000/api/profile';
+      final apiUrl = 'https://minglea.onrender.com/api/profile';
       final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final body = {
         'name': nameController.text,

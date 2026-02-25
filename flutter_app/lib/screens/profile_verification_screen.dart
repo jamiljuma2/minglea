@@ -27,7 +27,7 @@ class _ProfileVerificationScreenBodyState
   bool _facebookVerified = false;
 
   Future<void> _fetchVerificationStatus() async {
-    final apiUrl = 'http://localhost:5000/api/profile';
+    final apiUrl = 'https://minglea.onrender.com/api/profile';
     final token = await FirebaseAuth.instance.currentUser?.getIdToken();
     final response = await http.get(
       Uri.parse(apiUrl),
@@ -50,7 +50,7 @@ class _ProfileVerificationScreenBodyState
 
   Future<void> _sendSelfieUrlToBackend(String url) async {
     // Replace with your backend API endpoint
-    final apiUrl = 'http://localhost:5000/api/profile';
+    final apiUrl = 'https://minglea.onrender.com/api/profile';
     final token = await FirebaseAuth.instance.currentUser?.getIdToken();
     final response = await http.put(
       Uri.parse(apiUrl),

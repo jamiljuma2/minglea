@@ -20,7 +20,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     });
     try {
       final response = await http.get(
-        Uri.parse('http://localhost:5000/api/subscription'),
+        Uri.parse('https://minglea.onrender.com/api/subscription'),
         headers: {'Content-Type': 'application/json'},
       );
       if (response.statusCode == 200) {
@@ -53,7 +53,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       if (plan == 'premium' || plan == 'gold') {
         // Initiate payment before updating subscription
         final paymentResponse = await http.post(
-          Uri.parse('http://localhost:5000/api/payments/subscribe'),
+          Uri.parse('https://minglea.onrender.com/api/payments/subscribe'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'plan': plan}),
         );
@@ -66,7 +66,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         }
       }
       final response = await http.post(
-        Uri.parse('http://localhost:5000/api/subscription'),
+        Uri.parse('https://minglea.onrender.com/api/subscription'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'plan': plan}),
       );

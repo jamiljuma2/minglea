@@ -20,7 +20,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     });
     // Example: Call backend M-Pesa endpoint
     final response = await http.post(
-      Uri.parse('http://localhost:5000/api/payments/mpesa'),
+      Uri.parse('https://minglea.onrender.com/api/payments/mpesa'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({"amount": 100}),
     );
@@ -41,7 +41,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     });
     // Example: Call backend PayPal endpoint
     final response = await http.post(
-      Uri.parse('http://localhost:5000/api/payments/paypal'),
+      Uri.parse('https://minglea.onrender.com/api/payments/paypal'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({"amount": 100}),
     );

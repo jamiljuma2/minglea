@@ -54,7 +54,7 @@ class _SwipeMatchScreenState extends State<SwipeMatchScreen> {
     final lat = 0.0; // TODO: get from profile
     final lng = 0.0; // TODO: get from profile
     final apiUrl =
-        'http://localhost:5000/api/nearby?lat=$lat&lng=$lng&radius=$searchRadius';
+      'https://minglea.onrender.com/api/nearby?lat=$lat&lng=$lng&radius=$searchRadius';
     final token = await FirebaseAuth.instance.currentUser?.getIdToken();
     final response = await http.get(
       Uri.parse(apiUrl),
@@ -183,7 +183,7 @@ class _SwipeMatchScreenState extends State<SwipeMatchScreen> {
     });
     final candidate = candidates[currentIndex];
     final response = await http.post(
-      Uri.parse('http://localhost:5000/api/swipe'),
+      Uri.parse('https://minglea.onrender.com/api/swipe'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         "candidateId": candidate['name'],

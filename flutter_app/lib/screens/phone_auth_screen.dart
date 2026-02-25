@@ -63,7 +63,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
       // TODO: Navigate to main app screen
       // Example: Call backend API to sync user
       await http.post(
-        Uri.parse('http://localhost:5000/api/auth/phone'),
+        Uri.parse('https://minglea.onrender.com/api/auth/phone'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           "phone": phoneController.text.trim(),
