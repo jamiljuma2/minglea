@@ -17,6 +17,11 @@ app.use(cors({
 
 app.use(express.json());
 
+// Root route for Render and browser checks
+app.get('/', (req, res) => {
+  res.send('Backend is running!');
+});
+
 // Analytics routes
 const analyticsRoutes = require('./routes/analyticsRoutes');
 app.use('/api/analytics', analyticsRoutes);
