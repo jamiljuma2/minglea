@@ -9,9 +9,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load();
-  // Only initialize notifications if not running on web
   if (!kIsWeb) {
+    await dotenv.load();
     NotificationService.initialize();
   }
   runApp(const MyApp());
