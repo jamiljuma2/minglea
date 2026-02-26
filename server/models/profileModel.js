@@ -17,12 +17,12 @@ module.exports = {
     });
   },
   async updateProfile(userId, data) {
-    await admin.firestore().collection(PROFILES_COLLECTION).doc(userId).update({
+    await admin.firestore().collection(PROFILES_COLLECTION).doc(userId).set({
       ...data,
       selfieUrl: data.selfieUrl || null,
       latitude: data.latitude || null,
       longitude: data.longitude || null,
-    });
+    }, { merge: true });
   },
   async deleteProfile(userId) {
     await admin.firestore().collection(PROFILES_COLLECTION).doc(userId).delete();
