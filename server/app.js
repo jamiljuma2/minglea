@@ -7,7 +7,10 @@ const app = express();
 
 // Apply CORS middleware at the very top
 app.use(cors({
-  origin: [/^http:\/\/localhost:\d+$/],
+  origin: [
+    /^http:\/\/localhost:\d+$/,
+    'https://minglea-1.onrender.com'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
