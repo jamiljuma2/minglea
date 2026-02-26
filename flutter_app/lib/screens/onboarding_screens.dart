@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'onboarding_advanced.dart';
 
 class OnboardingFeaturesScreen extends StatelessWidget {
-  const OnboardingFeaturesScreen({Key? key}) : super(key: key);
+  const OnboardingFeaturesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class OnboardingFeaturesScreen extends StatelessWidget {
 }
 
 class OnboardingSafetyScreen extends StatelessWidget {
-  const OnboardingSafetyScreen({Key? key}) : super(key: key);
+  const OnboardingSafetyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

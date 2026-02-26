@@ -5,8 +5,7 @@ class RealTimeChatScreen extends StatefulWidget {
   final String peerId;
   final String peerName;
   const RealTimeChatScreen(
-      {Key? key, required this.peerId, required this.peerName})
-      : super(key: key);
+      {super.key, required this.peerId, required this.peerName});
 
   @override
   State<RealTimeChatScreen> createState() => _RealTimeChatScreenState();

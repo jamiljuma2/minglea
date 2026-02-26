@@ -6,8 +6,7 @@ class MatchScreen extends StatelessWidget {
   final String matchedUserId;
   final String matchedUserName;
   const MatchScreen(
-      {Key? key, required this.matchedUserId, required this.matchedUserName})
-      : super(key: key);
+      {super.key, required this.matchedUserId, required this.matchedUserName});
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +61,8 @@ class MatchScreen extends StatelessWidget {
 }
 
 class AnimatedMatchConfetti extends StatefulWidget {
+  const AnimatedMatchConfetti({super.key});
+
   @override
   State<AnimatedMatchConfetti> createState() => _AnimatedMatchConfettiState();
 }
@@ -129,7 +130,7 @@ class ConfettiPainter extends CustomPainter {
 }
 
 class AnimatedAvatar extends StatefulWidget {
-  const AnimatedAvatar({Key? key}) : super(key: key);
+  const AnimatedAvatar({super.key});
 
   @override
   State<AnimatedAvatar> createState() => _AnimatedAvatarState();

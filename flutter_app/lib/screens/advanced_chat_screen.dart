@@ -6,8 +6,7 @@ class AdvancedChatScreen extends StatefulWidget {
   final String peerId;
   final String peerName;
   const AdvancedChatScreen(
-      {Key? key, required this.peerId, required this.peerName})
-      : super(key: key);
+      {super.key, required this.peerId, required this.peerName});
 
   @override
   State<AdvancedChatScreen> createState() => _AdvancedChatScreenState();

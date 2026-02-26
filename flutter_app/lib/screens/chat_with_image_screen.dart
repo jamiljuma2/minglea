@@ -8,8 +8,7 @@ class ChatWithImageScreen extends StatefulWidget {
   final String peerId;
   final String peerName;
   const ChatWithImageScreen(
-      {Key? key, required this.peerId, required this.peerName})
-      : super(key: key);
+      {super.key, required this.peerId, required this.peerName});
 
   @override
   State<ChatWithImageScreen> createState() => _ChatWithImageScreenState();
