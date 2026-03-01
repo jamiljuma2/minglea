@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/app_theme.dart';
 import 'onboarding_advanced.dart';
 
 class OnboardingFeaturesScreen extends StatelessWidget {
@@ -10,90 +11,88 @@ class OnboardingFeaturesScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('App Features')),
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.pink, Colors.purple, Colors.amber],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          gradient: AppGradients.romantic,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(32.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LinearProgressIndicator(
-                  value: 0.2, minHeight: 6, color: Colors.pink),
-              const SizedBox(height: 24),
+                value: 0.2,
+                minHeight: 6,
+                color: AppColors.primary,
+                backgroundColor: AppColors.primary.withOpacity(0.15),
+              ),
+              const SizedBox(height: 32),
               Hero(
                 tag: 'onboarding_features',
-                child: Image.asset('assets/images/onboarding_features.png',
-                    height: 120),
+                child: Image.asset('assets/images/onboarding_features.png', height: 140),
               ),
-              const SizedBox(height: 24),
-              const Text('What makes Apex special?',
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
+              Text(
+                'What makes Minglea special?',
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontFamily: AppFonts.mainFont,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 700),
                 transitionBuilder: (child, animation) => SlideTransition(
-                  position:
-                      Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
-                          .animate(animation),
+                  position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero).animate(animation),
                   child: child,
                 ),
                 child: Column(
                   key: const ValueKey('features'),
                   children: [
                     ListTile(
-                      leading: const Icon(Icons.favorite, color: Colors.pink),
-                      title: const Text('Smart matching algorithm',
-                          style: TextStyle(color: Colors.white)),
+                      leading: Icon(Icons.favorite, color: AppColors.primary),
+                      title: const Text('Smart matching algorithm', style: TextStyle(color: Colors.white, fontFamily: AppFonts.mainFont)),
                     ),
                     ListTile(
-                      leading: const Icon(Icons.chat, color: Colors.purple),
-                      title: const Text('Real-time chat & media sharing',
-                          style: TextStyle(color: Colors.white)),
+                      leading: Icon(Icons.chat, color: AppColors.secondary),
+                      title: const Text('Real-time chat & media sharing', style: TextStyle(color: Colors.white, fontFamily: AppFonts.mainFont)),
                     ),
                     ListTile(
-                      leading: const Icon(Icons.security, color: Colors.blue),
-                      title: const Text('Safe & secure profiles',
-                          style: TextStyle(color: Colors.white)),
+                      leading: Icon(Icons.security, color: AppColors.secondary),
+                      title: const Text('Safe & secure profiles', style: TextStyle(color: Colors.white, fontFamily: AppFonts.mainFont)),
                     ),
                     ListTile(
-                      leading: const Icon(Icons.star, color: Colors.amber),
-                      title: const Text('Premium features & subscriptions',
-                          style: TextStyle(color: Colors.white)),
+                      leading: Icon(Icons.star, color: AppColors.gold),
+                      title: const Text('Premium features & subscriptions', style: TextStyle(color: Colors.white, fontFamily: AppFonts.mainFont)),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.pink,
+                  backgroundColor: AppColors.white,
+                  foregroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24)),
-                  elevation: 6,
+                    borderRadius: BorderRadius.circular(AppRadii.button),
+                  ),
+                  elevation: 8,
+                  padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 18),
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold, fontFamily: AppFonts.mainFont),
                 ),
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(
-                      pageBuilder: (_, __, ___) =>
-                          const OnboardingSafetyScreen(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
+                      pageBuilder: (_, __, ___) => const OnboardingSafetyScreen(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         return ScaleTransition(scale: animation, child: child);
                       },
                     ),
                   );
                 },
-                child: const Text('Next',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                child: const Text('Next'),
               ),
             ],
           ),
@@ -112,85 +111,84 @@ class OnboardingSafetyScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Safety Tips')),
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.pink, Colors.purple, Colors.amber],
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-          ),
+          gradient: AppGradients.romantic,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(32.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               LinearProgressIndicator(
-                  value: 0.4, minHeight: 6, color: Colors.pink),
-              const SizedBox(height: 24),
+                value: 0.4,
+                minHeight: 6,
+                color: AppColors.primary,
+                backgroundColor: AppColors.primary.withOpacity(0.15),
+              ),
+              const SizedBox(height: 32),
               Hero(
                 tag: 'onboarding_safety',
-                child: Image.asset('assets/images/onboarding_safety.png',
-                    height: 120),
+                child: Image.asset('assets/images/onboarding_safety.png', height: 140),
               ),
-              const SizedBox(height: 24),
-              const Text('Stay safe while dating!',
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
+              Text(
+                'Stay safe while dating!',
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontFamily: AppFonts.mainFont,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 700),
                 transitionBuilder: (child, animation) => SlideTransition(
-                  position: Tween<Offset>(
-                          begin: const Offset(-1, 0), end: Offset.zero)
-                      .animate(animation),
+                  position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero).animate(animation),
                   child: child,
                 ),
                 child: Column(
                   key: const ValueKey('safety'),
                   children: [
                     ListTile(
-                      leading:
-                          const Icon(Icons.verified_user, color: Colors.green),
-                      title: const Text('Never share sensitive info',
-                          style: TextStyle(color: Colors.white)),
+                      leading: const Icon(Icons.verified_user, color: Colors.green),
+                      title: const Text('Never share sensitive info', style: TextStyle(color: Colors.white, fontFamily: AppFonts.mainFont)),
                     ),
                     ListTile(
                       leading: const Icon(Icons.location_on, color: Colors.red),
-                      title: const Text('Meet in public places',
-                          style: TextStyle(color: Colors.white)),
+                      title: const Text('Meet in public places', style: TextStyle(color: Colors.white, fontFamily: AppFonts.mainFont)),
                     ),
                     ListTile(
                       leading: const Icon(Icons.report, color: Colors.orange),
-                      title: const Text('Report suspicious activity',
-                          style: TextStyle(color: Colors.white)),
+                      title: const Text('Report suspicious activity', style: TextStyle(color: Colors.white, fontFamily: AppFonts.mainFont)),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.pink,
+                  backgroundColor: AppColors.white,
+                  foregroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24)),
-                  elevation: 6,
+                    borderRadius: BorderRadius.circular(AppRadii.button),
+                  ),
+                  elevation: 8,
+                  padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 18),
+                  textStyle: const TextStyle(fontWeight: FontWeight.bold, fontFamily: AppFonts.mainFont),
                 ),
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(
                       pageBuilder: (_, __, ___) => OnboardingInterestsScreen(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         return ScaleTransition(scale: animation, child: child);
                       },
                     ),
                   );
                 },
-                child: const Text('Next',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                child: const Text('Next'),
               ),
             ],
           ),

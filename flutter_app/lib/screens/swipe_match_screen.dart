@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
+import '../constants/app_theme.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
 import 'subscription_screen.dart';
 import 'match_screen.dart' as match;
 
@@ -268,158 +268,224 @@ class _SwipeMatchScreenState extends State<SwipeMatchScreen> {
     );
     final candidate = candidates.isNotEmpty ? candidates[currentIndex] : null;
     return Scaffold(
-      appBar: AppBar(title: const Text('Swipe & Match')),
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : candidates.isEmpty
-              ? const Center(child: Text('No nearby users found.'))
-              : SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      sortDropdown,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Row(
-                          children: [
-                            const Text('Distance:'),
-                            Expanded(
-                              child: Slider(
-                                value: searchRadius,
-                                min: 1,
-                                max: 100,
-                                divisions: 99,
-                                label: '${searchRadius.toInt()} km',
-                                onChanged: (val) {
-                                  setState(() {
-                                    searchRadius = val;
-                                  });
-                                },
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: fetchCandidates,
-                              child: const Text('Refresh'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      ageFilterSlider,
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Row(
-                          children: [
-                            const Text('Gender:'),
-                            const SizedBox(width: 8),
-                            DropdownButton<String>(
-                              value: genderFilter,
-                              hint: const Text('Any'),
-                              items: availableGenders
-                                  .map((g) => DropdownMenuItem(
-                                      value: g, child: Text(g)))
-                                  .toList(),
-                              onChanged: (val) =>
-                                  setState(() => genderFilter = val),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Wrap(
-                          spacing: 8,
-                          children: availableInterests.map((interest) {
-                            final selected = interestsFilter.contains(interest);
-                            return FilterChip(
-                              label: Text(interest),
-                              selected: selected,
-                              onSelected: (val) {
-                                setState(() {
-                                  if (val) {
-                                    interestsFilter.add(interest);
-                                  } else {
-                                    interestsFilter.remove(interest);
-                                  }
-                                });
-                              },
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      Card(
-                        margin: const EdgeInsets.all(16),
-                        child: Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Column(
-                            children: [
-                              if (candidate?['photoUrl'] != null)
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(60),
-                                  child: Image.network(
-                                    candidate!['photoUrl'],
-                                    width: 120,
-                                    height: 120,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              Text(candidate?['name'] ?? '',
-                                  style: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold)),
-                              const SizedBox(height: 8),
-                              Text(candidate?['bio'] ?? ''),
-                              const SizedBox(height: 8),
-                              Text('Gender: ${candidate?['gender'] ?? ''}'),
-                              if (candidate?['age'] != null)
-                                Text('Age: ${candidate!['age']}'),
-                              if (candidate?['distance'] != null)
-                                Text(
-                                    'Distance: ${candidate!['distance'].toStringAsFixed(1)} km'),
-                              if (candidate?['online'] == true)
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.circle,
-                                        color: Colors.green, size: 16),
-                                    const SizedBox(width: 4),
-                                    const Text('Online'),
-                                  ],
-                                ),
-                              if (candidate?['lastActive'] != null)
-                                Text(
-                                    'Last active: ${candidate!['lastActive']}'),
-                              if (candidate?['interests'] != null)
-                                Wrap(
-                                  spacing: 6,
-                                  children: (candidate!['interests'] as List)
-                                      .map<Widget>((i) => Chip(label: Text(i)))
-                                      .toList(),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Row(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(title: const Text('Swipe & Match'), backgroundColor: Colors.transparent, elevation: 0),
+      body: Stack(
+        children: [
+          // Floating heart particles background placeholder
+          Positioned.fill(
+            child: IgnorePointer(
+              child: Opacity(
+                opacity: 0.10,
+                child: Image.asset(
+                  'assets/images/heart_particles_bg.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : candidates.isEmpty
+                  ? const Center(child: Text('No nearby users found.'))
+                  : SingleChildScrollView(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ElevatedButton(
-                            onPressed: () => swipe(false),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey),
-                            child: const Text('Pass'),
+                          sortDropdown,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Row(
+                              children: [
+                                const Text('Distance:'),
+                                Expanded(
+                                  child: Slider(
+                                    value: searchRadius,
+                                    min: 1,
+                                    max: 100,
+                                    divisions: 99,
+                                    label: '${searchRadius.toInt()} km',
+                                    onChanged: (val) {
+                                      setState(() {
+                                        searchRadius = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: fetchCandidates,
+                                  child: const Text('Refresh'),
+                                ),
+                              ],
+                            ),
                           ),
-                          const SizedBox(width: 24),
-                          ElevatedButton(
-                            onPressed: () => swipe(true),
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.pink),
-                            child: const Text('Like'),
+                          ageFilterSlider,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Row(
+                              children: [
+                                const Text('Gender:'),
+                                const SizedBox(width: 8),
+                                DropdownButton<String>(
+                                  value: genderFilter,
+                                  hint: const Text('Any'),
+                                  items: availableGenders
+                                      .map((g) => DropdownMenuItem(value: g, child: Text(g)))
+                                      .toList(),
+                                  onChanged: (val) => setState(() => genderFilter = val),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Wrap(
+                              spacing: 8,
+                              children: availableInterests.map((interest) {
+                                final selected = interestsFilter.contains(interest);
+                                return FilterChip(
+                                  label: Text(interest),
+                                  selected: selected,
+                                  onSelected: (val) {
+                                    setState(() {
+                                      if (val) {
+                                        interestsFilter.add(interest);
+                                      } else {
+                                        interestsFilter.remove(interest);
+                                      }
+                                    });
+                                  },
+                                  backgroundColor: AppColors.secondary.withOpacity(0.08),
+                                  selectedColor: AppColors.secondary.withOpacity(0.25),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(AppRadii.chip),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(AppRadii.card),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.25),
+                                    borderRadius: BorderRadius.circular(AppRadii.card),
+                                    border: Border.all(color: Colors.white.withOpacity(0.3)),
+                                    boxShadow: AppShadows.soft,
+                                  ),
+                                  padding: const EdgeInsets.all(28.0),
+                                  child: Column(
+                                    children: [
+                                      if (candidate?['photoUrl'] != null)
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            gradient: AppGradients.romantic,
+                                            boxShadow: AppShadows.soft,
+                                          ),
+                                          padding: const EdgeInsets.all(4),
+                                          child: ClipOval(
+                                            child: Image.network(
+                                              candidate!['photoUrl'],
+                                              width: 120,
+                                              height: 120,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        candidate?['name'] ?? '',
+                                        style: TextStyle(
+                                          fontSize: 26,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.primary,
+                                          fontFamily: AppFonts.mainFont,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        candidate?['bio'] ?? '',
+                                        style: TextStyle(fontSize: 16, color: AppColors.black.withOpacity(0.7)),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text('Gender: ${candidate?['gender'] ?? ''}'),
+                                      if (candidate?['age'] != null)
+                                        Text('Age: ${candidate!['age']}'),
+                                      if (candidate?['distance'] != null)
+                                        Text('Distance: ${candidate!['distance'].toStringAsFixed(1)} km'),
+                                      if (candidate?['online'] == true)
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.circle, color: Colors.green, size: 16),
+                                            const SizedBox(width: 4),
+                                            const Text('Online'),
+                                          ],
+                                        ),
+                                      if (candidate?['lastActive'] != null)
+                                        Text('Last active: ${candidate!['lastActive']}'),
+                                      if (candidate?['interests'] != null)
+                                        Wrap(
+                                          spacing: 6,
+                                          children: (candidate!['interests'] as List)
+                                              .map<Widget>((i) => Chip(
+                                                    label: Text(i),
+                                                    backgroundColor: AppColors.secondary.withOpacity(0.08),
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(AppRadii.chip),
+                                                    ),
+                                                  ))
+                                              .toList(),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () => swipe(false),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.grey.shade300,
+                                  foregroundColor: AppColors.black,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(AppRadii.button),
+                                  ),
+                                  elevation: 2,
+                                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                ),
+                                child: const Text('Pass'),
+                              ),
+                              const SizedBox(width: 24),
+                              ElevatedButton(
+                                onPressed: () => swipe(true),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.primary,
+                                  foregroundColor: AppColors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(AppRadii.button),
+                                  ),
+                                  elevation: 4,
+                                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                ),
+                                child: const Text('Like'),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+        ],
+      ),
     );
   }
 }

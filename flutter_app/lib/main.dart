@@ -6,6 +6,7 @@ import 'services/notification_service.dart';
 import 'screens/phone_auth_screen.dart';
 import 'screens/auth_screen.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'constants/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,54 +29,81 @@ class MyApp extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
-            title: 'Apex Dating App',
+            title: 'Minglea',
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.pink,
-                primary: Colors.pink,
-                secondary: Colors.purple,
-                background: Colors.white,
-                surface: Colors.white,
-                onPrimary: Colors.white,
-                onSecondary: Colors.white,
-                onBackground: Colors.black,
-                onSurface: Colors.black,
+              colorScheme: ColorScheme(
+                brightness: Brightness.light,
+                primary: AppColors.primary,
+                onPrimary: AppColors.white,
+                secondary: AppColors.secondary,
+                onSecondary: AppColors.white,
+                background: AppColors.background,
+                onBackground: AppColors.black,
+                surface: AppColors.white,
+                onSurface: AppColors.black,
+                error: AppColors.error,
+                onError: AppColors.white,
               ),
-              fontFamily: 'Montserrat',
+              fontFamily: AppFonts.mainFont,
               elevatedButtonTheme: ElevatedButtonThemeData(
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(AppRadii.button),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 18),
                   textStyle: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                  backgroundColor: Colors.pink,
-                  foregroundColor: Colors.white,
+                    fontSize: 18, fontWeight: FontWeight.w600),
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: AppColors.white,
                   elevation: 4,
                 ),
               ),
               cardTheme: CardThemeData(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(AppRadii.card),
                 ),
-                elevation: 6,
-                color: Colors.white,
-                shadowColor: Colors.pink.shade100,
+                elevation: 8,
+                color: AppColors.white,
+                shadowColor: AppColors.primary.withOpacity(0.08),
               ),
-              appBarTheme: const AppBarTheme(
-                backgroundColor: Colors.pink,
-                foregroundColor: Colors.white,
+              appBarTheme: AppBarTheme(
+                backgroundColor: AppColors.primary,
+                foregroundColor: AppColors.white,
                 elevation: 2,
-                titleTextStyle: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                titleTextStyle: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontFamily: AppFonts.mainFont,
+                ),
+              ),
+              chipTheme: ChipThemeData(
+                backgroundColor: AppColors.secondary.withOpacity(0.08),
+                labelStyle: const TextStyle(fontFamily: AppFonts.mainFont),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppRadii.chip),
+                ),
               ),
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-            home: AuthScreen(),
+            darkTheme: ThemeData(
+              colorScheme: ColorScheme(
+                brightness: Brightness.dark,
+                primary: AppColors.primary,
+                onPrimary: AppColors.white,
+                secondary: AppColors.secondary,
+                onSecondary: AppColors.white,
+                background: AppColors.darkBackground,
+                onBackground: AppColors.white,
+                surface: AppColors.darkBackground,
+                onSurface: AppColors.white,
+                error: AppColors.error,
+                onError: AppColors.white,
+              ),
+              fontFamily: AppFonts.mainFont,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            home: const AuthScreen(),
             debugShowCheckedModeBanner: false,
           );
         }
